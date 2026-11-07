@@ -1,0 +1,63 @@
+{
+  "name": "@gopyr/baileys",
+  "version": "1.0.0",
+  "description": "Stable WhatsApp Web multi-device API (Baileys family) \u2014 core features, community edition by Gopyr.",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./src/index.d.ts",
+        "default": "./src/index.js"
+      }
+    },
+    "./voip": {
+      "import": "./src/Voip/index.js",
+      "types": "./src/Voip/index.d.ts",
+      "default": "./src/Voip/index.js"
+    },
+    "./src/*": "./src/*",
+    "./*": "./*"
+  },
+  "scripts": {
+    "postinstall": "node engine-requirements.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gopyr/gopyr-baileys-lite.git"
+  },
+  "keywords": [
+    "whatsapp",
+    "baileys",
+    "multi-device",
+    "automation"
+  ],
+  "dependencies": {
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "@hapi/boom": "^9.1.3",
+    "async-mutex": "^0.5.0",
+    "fflate": "^0.8.2",
+    "libsignal": "^6.0.0",
+    "lru-cache": "^11.2.6",
+    "music-metadata": "^11.12.3",
+    "p-queue": "^9.1.0",
+    "pino": "^9.6.0",
+    "protobufjs": "^7.5.6",
+    "@rexxhayanasi/wangcap-id-bridge": "^1.0.0",
+    "ws": "^8.19.0"
+  },
+  "peerDependencies": {
+    "@napi-rs/image": "~1.12.0",
+    "audio-decode": "^2.2.3",
+    "fluent-ffmpeg": "*",
+    "jimp": "^1.6.1",
+    "link-preview-js": "^3.0.0",
+    "mysql2": "^3.0.0",
+    "sharp": "^0.35.0"
+  }
+}
