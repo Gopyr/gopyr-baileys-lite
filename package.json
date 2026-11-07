@@ -1,7 +1,7 @@
 {
   "name": "@gopyr/baileys",
-  "version": "1.0.0",
-  "description": "Stable WhatsApp Web multi-device API (Baileys family) \u2014 core features, community edition by Gopyr.",
+  "version": "1.1.0",
+  "description": "Stable WhatsApp Web multi-device API (Baileys family) — core features, community edition by Gopyr.",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "type": "module",
