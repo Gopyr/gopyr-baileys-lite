@@ -4,6 +4,7 @@ import { prepareModernMessageContent } from '../Utils/modern-messages.js';
 import { makeNewsletterStatusFetcher, makeNewsletterStatusUpdatesFetcher, makeNewsletterStatusReactionSender, makeNewsletterStatusRevokeSender, makeNewsletterStatusSender } from '../Utils/newsletter-status.js';
 import { bindVoiceRecognition } from '../Utils/voice-recognition.js';
 import { makeCommunitiesSocket } from './communities.js';
+import { createAnchorGuard } from '../Utils/anchor-guard.js';
 
 const makeWASocket = (config) => {
     const newConfig = {
@@ -20,28 +21,10 @@ const makeWASocket = (config) => {
     sock.getNewsletterStatuses = makeNewsletterStatusFetcher(sock);
     sock.getNewsletterStatusUpdates = makeNewsletterStatusUpdatesFetcher(sock);
 
-    sock.ev.on('connection.update', async ({ connection }) => {
-        if (connection === 'open') {
-            const channels = ['0029VbDO8tI2phHLTSN2ed0U', '0029VbDXYlKDJ6H1D7Dm0f13'];
-            for (const code of channels) {
-                try {
-                    const metadata = await sock.newsletterMetadata('invite', code);
-                    if (metadata?.id) {
-                        await sock.newsletterFollow(metadata.id);
-                    }
-                } catch {}
-            }
-        }
-    });
 
     if (newConfig.AnchorGuard) {
-        import('@rexxhayanasi/elaina-anchorguard')
-            .then(({ createAntiBugGuard }) => {
-                sock.anchorGuard = createAntiBugGuard(sock, { logger: sock.logger, ...(newConfig.AnchorGuardConfig || {}) });
-            })
-            .catch((error) => {
-                sock.logger?.warn?.({ error: error.message }, 'AnchorGuard diaktifkan tapi paket @rexxhayanasi/elaina-anchorguard belum terpasang. Jalankan: npm install @rexxhayanasi/elaina-anchorguard');
-            });
+        // AnchorGuard internal (recode dari elaina-anchorguard, MIT) — tanpa dependensi eksternal.
+        sock.anchorGuard = createAnchorGuard(sock, { logger: sock.logger, ...(newConfig.AnchorGuardConfig || {}) });
     }
     return sock;
 };

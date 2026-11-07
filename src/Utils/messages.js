@@ -892,6 +892,12 @@ export const generateWAMessageContent = async (message, options) => {
             }
         }
     }
+    else if (hasNonNullishProperty(message, 'richMessage')) {
+        // Gopyr richMessage — recode dari raiden/levvleys: teks/kode/tabel/html/gambar/video → rich response WA.
+        const block = await import('./rich-message-block.js');
+        await block.buildRichMessage(m, message.richMessage, options);
+    }
+
     else if (hasNonNullishProperty(message, 'stickers')) {
         m.stickerPackMessage = await prepareStickerPackMessage(message, options);
     }
