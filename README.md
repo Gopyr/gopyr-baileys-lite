@@ -20,3 +20,4 @@ import makeWASocket, { useMySQLAuthState } from '@gopyr/baileys';
 
 Lisensi MIT. Tidak berafiliasi dengan WhatsApp.
 - 2026-11-09 chore: tidy eslint overrides
+- 2026-11-13 refactor: split module for clarity
