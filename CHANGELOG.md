@@ -1,1 +1,2 @@
 - 2026-11-15 chore: bump lockfile
+- 2026-11-20 chore: remove dead code
